@@ -42,24 +42,3 @@ ul#countdown li .label {
   font-size: 1.5vw;
   text-transform: uppercase;
 }
-
-/* Mobile styles - stacking the countdown elements vertically */
-@media screen and (max-width: 768px) {
-  ul#countdown {
-    width: 80%;
-    padding: 20px 0;
-  }
-  
-  ul#countdown li {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-    font-size: 48px;
-    font-size: 12vw;
-  }
-  
-  ul#countdown li .label {
-    font-size: 16px;
-    font-size: 4vw;
-  }
-}
