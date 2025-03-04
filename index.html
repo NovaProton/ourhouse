@@ -33,7 +33,7 @@
         .container {
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 255, 255, 0.2);
             text-align: center;
             max-width: 600px;
@@ -49,7 +49,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-size: 2.8rem;
             letter-spacing: 1px;
             text-shadow: 0 2px 10px rgba(255, 64, 129, 0.2);
             position: relative;
@@ -71,25 +71,23 @@
         .countdown {
             display: flex;
             justify-content: space-around;
-            margin: 20px 0;
-            flex-wrap: wrap;
+            margin: 30px 0;
         }
         
         .countdown-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 5px;
         }
         
         .countdown-value {
-            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-size: 3rem;
             font-weight: bold;
             color: #fff;
             background: linear-gradient(145deg, #FF6B6B, #FF8E53);
-            border-radius: 12px;
-            width: clamp(60px, 20vw, 90px);
-            height: clamp(60px, 20vw, 90px);
+            border-radius: 16px;
+            width: 90px;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -97,7 +95,6 @@
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease;
-            margin: 0 2px;
         }
         
         .countdown-value:hover {
@@ -122,16 +119,16 @@
         }
         
         .countdown-label {
-            font-size: clamp(0.7rem, 2vw, 0.9rem);
-            margin-top: 8px;
+            font-size: 0.9rem;
+            margin-top: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #666;
         }
         
         .message {
-            margin: 15px 0;
-            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            margin: 20px 0;
+            font-size: 1.2rem;
             line-height: 1.5;
         }
         
@@ -192,27 +189,19 @@
         }
         
         .set-date {
-            margin-top: 25px;
-            padding: 15px;
+            margin-top: 30px;
+            padding: 20px;
             background-color: #f5f5f5;
             border-radius: 10px;
-        }
-        
-        .date-controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            display:none;
         }
         
         .set-date input {
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 5px;
+            margin-right: 10px;
             font-size: 1rem;
-            width: 100%;
-            max-width: 300px;
-            box-sizing: border-box;
         }
         
         .set-date button {
@@ -229,8 +218,6 @@
             box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
             position: relative;
             overflow: hidden;
-            width: 100%;
-            max-width: 300px;
         }
         
         .set-date button:hover {
@@ -259,7 +246,7 @@
         }
         
         .finished {
-            font-size: clamp(1.8rem, 6vw, 3rem);
+            font-size: 3rem;
             font-weight: bold;
             background: linear-gradient(to right, #FF416C, #FF4B2B, #FF8E53, #FF416C);
             background-size: 400% 400%;
@@ -270,7 +257,6 @@
             display: none;
             animation: gradient 3s ease infinite, bounce 0.5s ease infinite alternate;
             text-shadow: 0 2px 10px rgba(255, 64, 129, 0.3);
-            padding: 0 10px;
         }
         
         @keyframes gradient {
@@ -293,33 +279,6 @@
                 transform: translateY(-10px);
             }
         }
-        
-        /* Media Queries for better mobile experience */
-        @media (min-width: 768px) {
-            .date-controls {
-                flex-direction: row;
-                justify-content: center;
-            }
-            
-            .set-date button {
-                max-width: 200px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                margin-bottom: 10px;
-            }
-            
-            /* Reduce the number of bubbles on smaller screens */
-            .bubble:nth-child(n+10) {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body>
@@ -330,7 +289,7 @@
         <h1>The Moving Out Countdown!</h1>
         
         <div class="message">
-            <p>Counting down the days, hours, minutes, and seconds until freedom! <span class="party-emoji">🎉</span></p>
+            <p>Counting down until freedom! <span class="party-emoji">🎉</span></p>
         </div>
         
         <div class="countdown">
@@ -355,14 +314,12 @@
         <div id="finished" class="finished">
             THEY'RE GONE! FREEDOM AT LAST! 🎉
         </div>
-        <!--
+        
         <div class="set-date">
             <h3>Set the moving out date:</h3>
-            <div class="date-controls">
-                <input type="datetime-local" id="moving-date">
-                <button id="set-date-btn">Start Countdown</button>
-            </div>
-        </div>-->
+            <input type="datetime-local" id="moving-date">
+            <button id="set-date-btn">Start Countdown</button>
+        </div> 
         
         <div class="celebration" id="celebration"></div>
     </div>
@@ -389,13 +346,8 @@
         
         // Create confetti
         function createConfetti() {
-            // Adjust number of confetti elements based on screen size
-            const isMobile = window.innerWidth < 768;
-            const confettiCount = isMobile ? 75 : 150;
-            const emojiCount = isMobile ? 15 : 30;
-            
             // Regular confetti
-            for (let i = 0; i < confettiCount; i++) {
+            for (let i = 0; i < 150; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 confetti.style.left = Math.random() * 100 + 'vw';
@@ -425,7 +377,7 @@
             
             // Emoji confetti
             const emojis = ['🎉', '🎊', '🥳', '🎈', '🎇', '🎆', '🌟', '✨', '😎', '🤙', '👋', '💅', '👍', '💪'];
-            for (let i = 0; i < emojiCount; i++) {
+            for (let i = 0; i < 30; i++) {
                 const emoji = document.createElement('div');
                 emoji.classList.add('emoji');
                 emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -450,14 +402,12 @@
         // Create floating bubbles
         function createBubbles() {
             const bubblesContainer = document.getElementById('bubbles-container');
-            const isMobile = window.innerWidth < 768;
-            const bubbleCount = isMobile ? 10 : 20;
             
-            for (let i = 0; i < bubbleCount; i++) {
+            for (let i = 0; i < 20; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
                 bubble.style.left = Math.random() * 100 + 'vw';
-                bubble.style.width = Math.random() * 60 + 20 + 'px';
+                bubble.style.width = Math.random() * 80 + 20 + 'px';
                 bubble.style.height = bubble.style.width;
                 bubble.style.animationDelay = Math.random() * 10 + 's';
                 bubble.style.animationDuration = Math.random() * 10 + 10 + 's';
@@ -524,14 +474,6 @@
             // Start the countdown
             updateCountdown();
             countdownInterval = setInterval(updateCountdown, 1000);
-        });
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            // Clear existing bubbles
-            document.getElementById('bubbles-container').innerHTML = '';
-            // Create new bubbles appropriate for screen size
-            createBubbles();
         });
         
         // Create bubbles on page load
